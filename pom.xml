@@ -12,6 +12,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
             <groupId>opensymphony</groupId>
             <artifactId>sitemesh</artifactId>
             <version>2.4.2</version>
@@ -34,7 +47,7 @@
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webAppConfig>
-                        <contextPath>/test</contextPath>
+                        <contextPath>/springapp</contextPath>
                     </webAppConfig>
                 </configuration>
             </plugin>

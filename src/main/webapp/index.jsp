@@ -1,8 +1,8 @@
 <html>
-<head>
-    <meta name="decorator" content="printable"/>
-</head>
+<head><title>Example :: Spring Application</title></head>
 <body>
-<h2>Hello World!</h2>
+<h1>Example - Spring Application</h1>
+
+<p>This is my test.</p>
 </body>
 </html>

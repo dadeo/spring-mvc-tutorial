@@ -1,0 +1,12 @@
+<decorators defaultdir="/decorators">
+    <mapper class="com.opensymphony.module.sitemesh.mapper.PageDecoratorMapper">
+        <param name="property.1" value="meta.decorator" />
+        <param name="property.2" value="decorator" />
+    </mapper>
+
+    <decorator name="printable" page="printable.jsp"/>
+
+    <decorator name="main" page="main.jsp">
+        <pattern>/*</pattern>
+    </decorator>    
+</decorators>

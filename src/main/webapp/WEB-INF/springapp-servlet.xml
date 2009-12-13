@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+               http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-autowire="byName">
 
-    <bean name="/hello.htm" class="springapp.web.InventoryController">
-        <property name="productManager" ref="productManager"/>
-    </bean>
-
-    <bean name="/priceincrease.htm" class="springapp.web.PriceIncreaseFormController">
-        <property name="sessionForm" value="true"/>
-        <property name="commandName" value="priceIncrease"/>
-        <property name="commandClass" value="springapp.service.PriceIncrease"/>
-        <property name="validator">
-            <bean class="springapp.service.PriceIncreaseValidator"/>
-        </property>
-        <property name="formView" value="priceincrease"/>
-        <property name="successView" value="hello.htm"/>
-        <property name="productManager" ref="productManager"/>
-    </bean>
+    <context:component-scan base-package="springapp"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>

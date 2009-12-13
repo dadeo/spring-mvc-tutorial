@@ -1,8 +1,8 @@
 package springapp.service;
 
-import java.util.List;
-
 import springapp.domain.Product;
+
+import java.util.List;
 
 public class SimpleProductManager implements ProductManager {
     private List<Product> products;

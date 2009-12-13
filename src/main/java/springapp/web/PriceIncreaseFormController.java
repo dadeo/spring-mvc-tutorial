@@ -1,33 +1,48 @@
 package springapp.web;
 
-import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import springapp.service.ProductManager;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import springapp.service.PriceIncrease;
+import springapp.service.ProductManager;
 
-public class PriceIncreaseFormController extends SimpleFormController {
+@Controller
+@RequestMapping("/priceincrease.htm")
+@SessionAttributes("priceIncrease")
+public class PriceIncreaseFormController {
     protected final Log logger = LogFactory.getLog(getClass());
     private ProductManager productManager;
+    private Validator priceIncreaseValidator;
 
-    public ModelAndView onSubmit(Object command) throws ServletException {
-        int increase = ((PriceIncrease) command).getPercentage();
-        logger.info("Increasing prices by " + increase + "%.");
-        productManager.increasePrice(increase);
-        logger.info("returning from PriceIncreaseForm view to " + getSuccessView());
-        return new ModelAndView(new RedirectView(getSuccessView()));
-    }
-
-    protected Object formBackingObject(HttpServletRequest request) throws ServletException {
+    @RequestMapping(method = RequestMethod.GET)
+    public String setupForm(ModelMap model) {
         PriceIncrease priceIncrease = new PriceIncrease();
         priceIncrease.setPercentage(20);
-        return priceIncrease;
+        model.addAttribute("priceIncrease", priceIncrease);
+        return "priceincrease";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String processSubmit(@ModelAttribute("priceIncrease") PriceIncrease priceIncrease, BindingResult result, SessionStatus status) {
+        priceIncreaseValidator.validate(priceIncrease, result);
+        if (result.hasErrors()) {
+            return "priceincrease";
+        } else {
+            int increase = priceIncrease.getPercentage();
+            logger.info("Increasing prices by " + increase + "%.");
+            productManager.increasePrice(increase);
+            logger.info("returning from PriceIncreaseForm view to hello");
+            status.setComplete();
+            return "redirect:/hello.htm";
+        }
     }
 
     public void setProductManager(ProductManager productManager) {
@@ -36,5 +51,9 @@ public class PriceIncreaseFormController extends SimpleFormController {
 
     public ProductManager getProductManager() {
         return productManager;
+    }
+
+    public void setPriceIncreaseValidator(Validator priceIncreaseValidator) {
+        this.priceIncreaseValidator = priceIncreaseValidator;
     }
 }

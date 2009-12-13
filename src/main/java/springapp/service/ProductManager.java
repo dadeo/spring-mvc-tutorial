@@ -1,9 +1,9 @@
 package springapp.service;
 
+import springapp.domain.Product;
+
 import java.io.Serializable;
 import java.util.List;
-
-import springapp.domain.Product;
 
 public interface ProductManager extends Serializable {
 

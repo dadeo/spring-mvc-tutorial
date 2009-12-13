@@ -1,9 +1,9 @@
 package springapp.service;
 
-import java.util.List;
-
 import springapp.domain.Product;
 import springapp.repository.ProductDao;
+
+import java.util.List;
 
 public class DaoProductManager implements ProductManager {
     private ProductDao productDao;

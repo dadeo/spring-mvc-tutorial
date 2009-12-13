@@ -1,4 +1,4 @@
-package springapp.service;
+package springapp.web;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

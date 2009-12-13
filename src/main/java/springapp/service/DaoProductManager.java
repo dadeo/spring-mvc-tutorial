@@ -1,10 +1,12 @@
 package springapp.service;
 
+import org.springframework.stereotype.Service;
 import springapp.domain.Product;
 import springapp.repository.ProductDao;
 
 import java.util.List;
 
+@Service("productManager")
 public class DaoProductManager implements ProductManager {
     private ProductDao productDao;
 

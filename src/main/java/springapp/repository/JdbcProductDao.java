@@ -1,16 +1,18 @@
 package springapp.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 import springapp.domain.Product;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+@Repository("productDao")
 public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
     protected final Log logger = LogFactory.getLog(getClass());
 

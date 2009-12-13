@@ -31,15 +31,6 @@
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
 
-    <aop:config>
-        <aop:advisor pointcut="execution(* *..ProductManager.*(..))" advice-ref="txAdvice"/>
-    </aop:config>
-
-    <tx:advice id="txAdvice">
-        <tx:attributes>
-            <tx:method name="increasePrice"/>
-            <tx:method name="*" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
+    <tx:annotation-driven/>
 
 </beans>

@@ -1,12 +1,16 @@
 package springapp.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import springapp.domain.Product;
 import springapp.repository.ProductDao;
 
 import java.util.List;
 
 @Service("productManager")
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = true)
 public class DaoProductManager implements ProductManager {
     private ProductDao productDao;
 
@@ -14,6 +18,7 @@ public class DaoProductManager implements ProductManager {
         return productDao.getProductList();
     }
 
+    @Transactional(readOnly = false)
     public void increasePrice(int percentage) {
         List<Product> products = productDao.getProductList();
         if (products != null) {
